@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# Setting up firebase
+1. Create a firebase project if required.
+2. Create an app in the project if required.
+3. Click on settings -> Project Settings.
+4. Click on the desired app to get the config.
+5. Create a .env file in the root directory of the project.
+6. Add the config from firebase in the .env file (Refer the template in demp.env file in the root directory)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
