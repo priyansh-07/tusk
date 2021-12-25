@@ -13,30 +13,27 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { useContext } from 'react'
+import { AuthContext } from '../contexts/AuthContext';
+import { signIn } from '../firebase/firebase'
+import { Credentials } from '../types'
 
 const theme = createTheme();
 
-export default function SignInSide() { 
+export default function SignInSide() {
+  const context = useContext(AuthContext)
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    if (!data.get('email') || !data.get('password')) {
+      alert("Please enter email id and password")
+      return
+    }
+    const credentials: Credentials = {
+      email: data.get('email') as string,
+      password: data.get('password') as string
+    }
+    signIn(credentials, context)
   };
 
   return (
@@ -118,7 +115,6 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>
