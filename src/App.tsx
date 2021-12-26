@@ -6,7 +6,6 @@ import React, { useContext } from "react";
 
 function App() {
   const context = useContext(AuthContext);
-  let foo = () => 0
 
   return (
     <Router>
